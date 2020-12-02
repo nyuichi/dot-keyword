@@ -1540,6 +1540,27 @@ pub(crate) mod parsing {
                     continue;
                 }
 
+                let match_token: Option<token::Match> = input.parse()?;
+                if let Some(match_token) = match_token {
+                    let content;
+                    let brace_token = braced!(content in input);
+                    let inner_attrs = content.call(Attribute::parse_inner)?;
+
+                    let mut arms = Vec::new();
+                    while !content.is_empty() {
+                        arms.push(content.call(Arm::parse)?);
+                    }
+
+                    e = Expr::Match(ExprMatch {
+                        attrs: private::attrs(vec![], inner_attrs),
+                        match_token,
+                        expr: Box::new(e),
+                        brace_token,
+                        arms,
+                    });
+                    continue;
+                }
+
                 let float_token: Option<LitFloat> = input.parse()?;
                 if let Some(float_token) = float_token {
                     if multi_index(&mut e, &mut dot_token, float_token)? {

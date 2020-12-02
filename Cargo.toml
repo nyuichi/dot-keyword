@@ -6,3 +6,9 @@ edition = "2018"
 license = "MIT OR Apache-2.0"
 
 [dependencies]
+syn = { path = "./syn", features = ["full"] }
+proc-macro2 = "1"
+quote = "1"
+
+[lib]
+proc-macro = true
