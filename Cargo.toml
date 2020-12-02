@@ -1,0 +1,8 @@
+[package]
+name = "dot-keyword"
+version = "0.1.0"
+authors = ["Yuichi Nishiwaki <yuichi.nishiwaki@gmail.com>"]
+edition = "2018"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
